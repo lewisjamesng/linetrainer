@@ -8,6 +8,7 @@ djangorestframework = "*"
 django = "*"
 requests = "*"
 python-decouple = "*"
+chess = "*"
 
 [dev-packages]
 
