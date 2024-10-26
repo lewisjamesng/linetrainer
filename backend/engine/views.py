@@ -25,7 +25,7 @@ def analyse(request):
     elif request.method == "POST":
         # TODO: get instance of engine in the backend
         # position_pgn = request.data.get("position")
-        position_fen = "rnbk1b1r/pp2ppp1/5n1p/8/8/8/PPPP1PPP/RNBQKBNR w KQ - 0 6"
+        position_fen = "rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2"
         engine = ChessEngine()
         analysis = engine.analyse(position_fen)
         # serialiser = ChildNodeSerialiser(analysis, many=True)
