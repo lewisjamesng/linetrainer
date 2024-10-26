@@ -22,5 +22,5 @@ from django.urls import include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("lichess/", include("lichess.urls")),
+    path("engine/", include("engine.urls")),
 ]
