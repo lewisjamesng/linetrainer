@@ -83,18 +83,20 @@ export default function ChessboardBlock() {
         } else {
           game.load(gameStates[positionNumber - 1]);
         }
-      } catch {}
+      } catch (e) {
+        console.log(e);
+      }
       setPositionNumber(positionNumber - 1);
     }
-    console.log(positionNumber);
-    console.log(fenToBoard(game.fen()));
   };
 
   const goForwards = () => {
     if (positionNumber < gameStates.length - 1) {
       try {
         game.load(gameStates[positionNumber + 1]);
-      } catch {}
+      } catch (e) {
+        console.log(e);
+      }
       setPositionNumber(positionNumber + 1);
     }
   };
