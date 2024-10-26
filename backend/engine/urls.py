@@ -4,4 +4,5 @@ from . import views
 # URLconf
 urlpatterns = [
     path("", views.engine),
+    path("analyse/", views.analyse),
 ]
