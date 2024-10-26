@@ -3,6 +3,6 @@ from . import views
 
 # URLconf
 urlpatterns = [
-    path("engines/", views.engines),
+    path("engine/", views.engine),
     path("analyse/", views.analyse),
 ]
