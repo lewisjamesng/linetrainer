@@ -1,13 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import ChessboardBlock from "./ChessboardBlock";
+import { ChessProvider } from "../contexts/ChessContext";
+import ChessboardBlock from "./ChessboardBlock/ChessboardBlock";
+import LineSelector from "./LineSelector";
 
 export default function App() {
   return (
-    <div className="flex justify-center">
-      <div className="w-1/2">
-        <ChessboardBlock />
+    <ChessProvider>
+      <div className="flex justify-between">
+        <div className="w-1/4">
+          <LineSelector />
+        </div>
+        <div className="w-3/4 me-5">
+          <ChessboardBlock />
+        </div>
       </div>
-    </div>
+    </ChessProvider>
   );
 }

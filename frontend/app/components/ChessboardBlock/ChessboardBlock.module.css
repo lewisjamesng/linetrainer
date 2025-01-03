@@ -1,0 +1,25 @@
+.highlighted {
+  background-color: #bccbb4;
+}
+
+.movesSection {
+  background-color: #efefef;
+  font-size: 125%;
+  color: #444;
+}
+
+.tableCell {
+  border-bottom: 1px solid #ccc;
+}
+
+.boardContainer {
+  background-color: #eee;
+}
+
+.moveButton {
+  border-radius: 25%;
+  padding: 4px 12px;
+  border: 2px solid #aaa;
+  background-color: #ccc;
+  color: #666;
+}
