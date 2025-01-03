@@ -45,6 +45,8 @@ class ChessEngine:
     def analyse(self, position_fen: str):
         board = Board(position_fen)
 
-        max, best_moves = nega_max_search(3, board)
+        eval, best_line = nega_max_search(3, board)
+        move = best_line[0]
+        board.push_san(move)
 
-        return "variations"
+        return move, eval, board.fen()

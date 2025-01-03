@@ -13,7 +13,6 @@ def engine(request):
         return Response("ok")
 
     elif request.method == "POST":
-        # TODO: create instance of engine in the backend
         return Response("new engine", status=status.HTTP_201_CREATED)
 
 
@@ -23,11 +22,15 @@ def analyse(request):
         return Response("ok")
 
     elif request.method == "POST":
-        # TODO: get instance of engine in the backend
-        # position_pgn = request.data.get("position")
-        position_fen = "rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2"
+        position_fen = request.data.get("position")
+        # position_fen = "rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2"
         engine = ChessEngine()
-        analysis = engine.analyse(position_fen)
-        # serialiser = ChildNodeSerialiser(analysis, many=True)
+        move, eval, position = engine.analyse(position_fen)
 
-        return Response(analysis, status=status.HTTP_200_OK)
+        body = {
+            "move": move,
+            "eval": eval,
+            "position": position,
+        }
+
+        return Response(body, status=status.HTTP_200_OK)
