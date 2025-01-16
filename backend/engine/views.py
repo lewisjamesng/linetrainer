@@ -25,12 +25,13 @@ def analyse(request):
         position_fen = request.data.get("position")
         # position_fen = "rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2"
         engine = ChessEngine()
-        move, eval, position = engine.analyse(position_fen)
+        move, eval, position, best_line = engine.analyse(position_fen)
 
         body = {
             "move": move,
             "eval": eval,
             "position": position,
+            "best_line": best_line,
         }
 
         return Response(body, status=status.HTTP_200_OK)

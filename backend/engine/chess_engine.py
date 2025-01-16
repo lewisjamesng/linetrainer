@@ -49,4 +49,4 @@ class ChessEngine:
         move = best_line[0]
         board.push_san(move)
 
-        return move, eval, board.fen()
+        return move, eval, board.fen(), best_line
