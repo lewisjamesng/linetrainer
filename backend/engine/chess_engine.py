@@ -1,24 +1,47 @@
 from dataclasses import dataclass
+from time import perf_counter
 
-from chess import WHITE, Board, Move
+from chess import WHITE, Board
 
 
-def nega_max_search(depth: int, board: Board):
+def alpha_beta_search(alpha: int, beta: int, depth: int, board: Board):
+    """
+    Performs a Negamax search with alpha-beta pruning to find the best move.
+
+    Parameters:
+    alpha: Represents the min score / eval the maximising player is assured of assuming optimal play from both sides.
+    beta: Represents the max score / eval the the minimising player can get. The maximising player will avoid this move if it's higher than the alpha they can achieve.
+    depth: The search depth
+    board: A Board object representing the current state of the chess board
+
+    Returns:
+    best_score: Current position evaluation
+    best_moves: The principle line containing the top moves from each player
+    """
     if depth == 0:
+        # TODO: return a quiescence search to make the engine more stable (https://www.chessprogramming.org/Quiescence_Search)
         return evaluate_position(board), []
 
-    max = -float("inf")
+    best_score = -float("inf")
+    best_moves = []
     legal_moves = board.legal_moves
     for move in legal_moves:
         board.push(move)
-        score, candidate_path = nega_max_search(depth - 1, board)
+        score, candidate_path = alpha_beta_search(-beta, -alpha, depth - 1, board)
         score *= -1
         board.pop()
-        if score > max:
-            max = score
+
+        if score > best_score:
+            best_score = score
             best_moves = [board.san(move)] + candidate_path
 
-    return max, best_moves
+            if score > alpha:
+                alpha = score
+
+        if score >= beta:
+            break
+
+    return best_score, best_moves
 
 
 def evaluate_position(board: Board) -> float:
@@ -45,7 +68,7 @@ class ChessEngine:
     def analyse(self, position_fen: str):
         board = Board(position_fen)
 
-        eval, best_line = nega_max_search(3, board)
+        eval, best_line = alpha_beta_search(float("-inf"), float("inf"), 6, board)
         move = best_line[0]
         board.push_san(move)
 
